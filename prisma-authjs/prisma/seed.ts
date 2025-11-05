@@ -1,22 +1,26 @@
 import { Prisma } from '@/lib/generated/prisma/client';
 import prisma from '@/lib/prisma';
+import bcrypt from 'bcryptjs';
+
+const hashPassword = bcrypt.hashSync('password123', 10);
 
 const userData: Prisma.UserCreateInput[] = [
   {
     name: 'John Doe',
     email: 'john@example.com',
-    password: 'password123',
+    password: hashPassword,
+    role: 'USER',
     posts: {
       create: [
         {
-          title: 'Getting Started with Prisma',
+          title: 'Getting Started with Next.js 15',
           content:
-            'Prisma adalah ORM modern untuk Node.js dan TypeScript. Dengan Prisma, kita bisa bekerja dengan database menggunakan type-safe queries yang membuat development lebih cepat dan aman.',
+            'Next.js 15 membawa fitur-fitur baru yang amazing termasuk improved performance dan better developer experience. Di post ini, kita akan explore key changes dan cara migrate aplikasi yang sudah ada.',
         },
         {
-          title: 'Why TypeScript is Awesome',
+          title: 'Understanding React Server Components',
           content:
-            'TypeScript memberikan type safety yang membuat code kita lebih maintainable dan mengurangi bugs di production. Dengan TypeScript, kita bisa catch error sebelum runtime.',
+            'React Server Components adalah cara baru untuk build aplikasi. Mereka memungkinkan kita render components di server, mengurangi jumlah JavaScript yang dikirim ke client dan meningkatkan performance secara signifikan.',
         },
       ],
     },
@@ -24,98 +28,117 @@ const userData: Prisma.UserCreateInput[] = [
   {
     name: 'Jane Smith',
     email: 'jane@example.com',
-    password: 'password123',
+    password: hashPassword,
+    role: 'USER',
     posts: {
       create: [
         {
-          title: 'Introduction to Next.js',
+          title: 'Prisma ORM Best Practices',
           content:
-            'Next.js adalah React framework yang powerful untuk building production-ready applications dengan fitur seperti SSR, SSG, dan API routes yang sangat memudahkan development.',
+            'Prisma adalah ORM yang powerful untuk Node.js dan TypeScript. Pelajari best practices termasuk schema design, query optimization, dan handling relationships secara efisien di database kamu.',
+        },
+        {
+          title: 'Building Scalable APIs with tRPC',
+          content:
+            'tRPC memungkinkan kamu build end-to-end typesafe APIs dengan mudah. Discover cara integrate tRPC dengan Next.js application dan enjoy full type safety dari frontend ke backend.',
+        },
+        {
+          title: 'TypeScript Tips and Tricks',
+          content:
+            'TypeScript sudah menjadi standard untuk modern web development. Berikut adalah beberapa advanced tips dan tricks untuk membantu kamu write better, more maintainable code dengan strong type safety.',
         },
       ],
     },
   },
   {
-    name: 'Bob Johnson',
-    email: 'bob@example.com',
-    password: 'password123',
+    name: 'Michael Johnson',
+    email: 'michael@example.com',
+    password: hashPassword,
+    role: 'USER',
     posts: {
       create: [
         {
-          title: 'CSS Tips and Tricks',
+          title: 'Deploying Next.js to Vercel',
           content:
-            'CSS modern sekarang sudah sangat powerful dengan fitur seperti Grid, Flexbox, dan Custom Properties yang membuat styling jadi lebih mudah dan maintainable.',
-        },
-        {
-          title: 'Responsive Design Best Practices',
-          content:
-            'Mobile-first approach adalah kunci untuk membuat website yang responsive dan user-friendly di semua device. Gunakan media queries dengan bijak untuk hasil yang optimal.',
-        },
-        {
-          title: 'Tailwind CSS Guide',
-          content:
-            'Tailwind CSS adalah utility-first CSS framework yang memudahkan kita untuk styling tanpa harus keluar dari HTML. Produktivitas meningkat drastis dengan Tailwind.',
+            'Vercel menyediakan platform terbaik untuk deploying Next.js applications. Pelajari tentang environment variables, preview deployments, dan optimizing app kamu untuk production.',
         },
       ],
     },
   },
   {
-    name: 'Alice Williams',
-    email: 'alice@example.com',
-    password: 'password123',
+    name: 'Sarah Williams',
+    email: 'sarah@example.com',
+    password: hashPassword,
+    role: 'USER',
     posts: {
       create: [
         {
-          title: 'React Hooks Explained',
+          title: 'Tailwind CSS vs Styled Components',
           content:
-            'React Hooks seperti useState dan useEffect memungkinkan kita menggunakan state dan lifecycle methods di functional components. Hooks membuat code lebih clean dan reusable.',
+            'Memilih styling solution yang tepat sangat crucial untuk project kamu. Artikel ini compare Tailwind CSS dan Styled Components, discussing pros and cons dari setiap approach.',
+        },
+        {
+          title: 'Authentication with NextAuth.js',
+          content:
+            'NextAuth.js membuat authentication simple dan secure. Pelajari cara implement OAuth providers, credentials login, dan protect routes kamu dengan middleware.',
         },
       ],
     },
   },
   {
-    name: 'Charlie Brown',
-    email: 'charlie@example.com',
-    password: 'password123',
-    posts: {
-      create: [
-        {
-          title: 'JavaScript ES6+ Features',
-          content:
-            'ES6+ membawa banyak fitur modern seperti arrow functions, destructuring, spread operator, dan async/await yang sangat berguna untuk development modern.',
-        },
-        {
-          title: 'Async Programming in JavaScript',
-          content:
-            'Memahami Promises dan async/await adalah essential untuk modern JavaScript development, terutama untuk handling API calls dan operasi asynchronous lainnya.',
-        },
-      ],
-    },
-  },
-  {
-    name: 'David Miller',
+    name: 'David Brown',
     email: 'david@example.com',
-    password: 'password123',
+    password: hashPassword,
+    role: 'USER',
+    posts: {
+      create: [
+        {
+          title: 'PostgreSQL Performance Tuning',
+          content:
+            'Database performance sangat critical untuk setiap aplikasi. Explore indexing strategies, query optimization, dan connection pooling untuk membuat PostgreSQL database kamu lightning fast.',
+        },
+        {
+          title: 'Docker for Developers',
+          content:
+            'Docker telah revolutionized development workflows. Pelajari cara containerize aplikasi kamu, gunakan docker-compose untuk local development, dan deploy ke production.',
+        },
+        {
+          title: 'GraphQL vs REST: Which to Choose?',
+          content:
+            'Baik GraphQL maupun REST punya tempatnya di modern applications. Comprehensive guide ini membantu kamu decide approach mana yang terbaik untuk use case spesifik kamu.',
+        },
+      ],
+    },
   },
   {
-    name: 'Emma Davis',
-    email: 'emma@example.com',
-    password: 'password123',
+    name: 'Emily Davis',
+    email: 'emily@example.com',
+    password: hashPassword,
+    role: 'USER',
   },
   {
-    name: 'Frank Wilson',
-    email: 'frank@example.com',
-    password: 'password123',
+    name: 'Robert Miller',
+    email: 'robert@example.com',
+    password: hashPassword,
+    role: 'USER',
   },
   {
-    name: 'Grace Moore',
-    email: 'grace@example.com',
-    password: 'password123',
+    name: 'Lisa Anderson',
+    email: 'lisa@example.com',
+    password: hashPassword,
+    role: 'USER',
   },
   {
-    name: 'Henry Taylor',
-    email: 'henry@example.com',
-    password: 'password123',
+    name: 'James Wilson',
+    email: 'james@example.com',
+    password: hashPassword,
+    role: 'USER',
+  },
+  {
+    name: 'Maria Garcia',
+    email: 'maria@example.com',
+    password: hashPassword,
+    role: 'USER',
   },
 ];
 
@@ -132,6 +155,13 @@ async function main() {
     const user = await prisma.user.create({ data: u });
     console.log(`✅ Created user: ${user.name}`);
   }
+  const totalUsers = await prisma.user.count();
+  const totalPosts = await prisma.post.count();
+
+  console.log('\n✨ Seeding selesai!');
+  console.log(`📊 Total users: ${totalUsers}`);
+  console.log(`📝 Total posts: ${totalPosts}`);
+  console.log('🔑 Password semua user: password123');
 
   console.log('✨ Seeding selesai!');
 }
