@@ -1,15 +1,25 @@
+'use server';
+
+import { SignUpFormState } from '@/components/form/signup-credential';
 import prisma from '@/lib/prisma';
 import { signUpCredentialSchema } from '@/lib/zod';
 import bcrypt from 'bcryptjs';
+import { redirect } from 'next/navigation';
 
-export type LoginState = {
-  success: boolean | null;
-  message: string;
-  data?: unknown;
-};
+export async function signUpCredential(
+  _: SignUpFormState,
+  formData: FormData
+): Promise<SignUpFormState> {
+  const validateFields = signUpCredentialSchema.safeParse(Object.fromEntries(formData));
 
-export const signUpCredential = async (_: unknown, formData: FormData): Promise<LoginState> => {
-  const { name, email, password } = await signUpCredentialSchema.parseAsync(formData);
+  if (!validateFields.success) {
+    return {
+      success: false,
+      errors: validateFields.error.flatten().fieldErrors,
+    };
+  }
+
+  const { email, name, password } = validateFields.data;
 
   const hashPassword = bcrypt.hashSync(password, 10);
 
@@ -29,5 +39,12 @@ export const signUpCredential = async (_: unknown, formData: FormData): Promise<
     },
   });
 
-  return { success: true, message: 'Success buat user', data: newUser };
-};
+  if (!newUser) {
+    return {
+      success: false,
+      message: 'An error occurred while creating your account.',
+    };
+  }
+
+  redirect('/login');
+}

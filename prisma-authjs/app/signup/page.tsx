@@ -1,8 +1,6 @@
 import { GalleryVerticalEnd } from 'lucide-react';
 
 import { SignupCredentialForm } from '@/components/form/signup-credential';
-import { SignupMagicLinkForm } from '@/components/form/signup-magic-link';
-import { SignupOAuthForm } from '@/components/form/signup-oauth';
 import { FieldDescription, FieldGroup, FieldSeparator } from '@/components/ui/field';
 import Link from 'next/link';
 
@@ -28,14 +26,6 @@ export default function SignupPage() {
             <FieldSeparator>With Credential 👇</FieldSeparator>
 
             <SignupCredentialForm />
-
-            <FieldSeparator>With Magic Link 👇</FieldSeparator>
-
-            <SignupMagicLinkForm />
-
-            <FieldSeparator>With OAuth 👇</FieldSeparator>
-
-            <SignupOAuthForm />
           </FieldGroup>
           <FieldDescription className="px-6 text-center">
             By clicking continue, you agree to our <a href="#">Terms of Service</a> and{' '}
