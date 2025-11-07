@@ -26,6 +26,15 @@ export default function LoginPage() {
 
             <FieldSeparator>With Credential 👇</FieldSeparator>
 
+            {/* {error && (
+              <div className="p-3 bg-red-50 border border-red-200 rounded-md">
+                <p className="text-sm text-red-600">
+                  {errorMessages[error as keyof typeof errorMessages] ||
+                    'Terjadi kesalahan. Silakan coba lagi.'}
+                </p>
+              </div>
+            )} */}
+
             <LoginCredentialForm />
 
             <FieldSeparator>With Magic Link 👇</FieldSeparator>

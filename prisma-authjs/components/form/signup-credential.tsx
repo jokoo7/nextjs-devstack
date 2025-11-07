@@ -1,6 +1,6 @@
 'use client';
 
-import { signUpCredential } from '@/app/signup/action';
+import { signUpCredential } from '@/lib/actions/auth.action';
 import { cn } from '@/lib/utils';
 import { useActionState } from 'react';
 import { Button } from '../ui/button';
@@ -32,6 +32,7 @@ export function SignupCredentialForm({ className, ...props }: React.ComponentPro
             <FieldDescription className="text-red-500">{state.errors.name}</FieldDescription>
           )}
         </Field>
+
         <Field>
           <FieldLabel htmlFor="email">Email</FieldLabel>
           <Input name="email" id="email" type="email" placeholder="m@example.com" required />
@@ -39,6 +40,7 @@ export function SignupCredentialForm({ className, ...props }: React.ComponentPro
             <FieldDescription className="text-red-500">{state.errors.email}</FieldDescription>
           )}
         </Field>
+
         <Field>
           <FieldLabel htmlFor="password">Password</FieldLabel>
           <Input name="password" id="password" type="password" placeholder="********" required />
@@ -46,6 +48,7 @@ export function SignupCredentialForm({ className, ...props }: React.ComponentPro
             <FieldDescription className="text-red-500">{state.errors.password}</FieldDescription>
           )}
         </Field>
+
         <Field>
           <FieldLabel htmlFor="confirm-password">Confirm Password</FieldLabel>
           <Input

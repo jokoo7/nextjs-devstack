@@ -1,9 +1,12 @@
 'use server';
 
+import { signIn } from '@/auth';
+import { LoginFormState } from '@/components/form/login-credential';
 import { SignUpFormState } from '@/components/form/signup-credential';
 import prisma from '@/lib/prisma';
-import { signUpCredentialSchema } from '@/lib/zod';
+import { loginCredentialSchema, signUpCredentialSchema } from '@/lib/zod';
 import bcrypt from 'bcryptjs';
+import { CredentialsSignin } from 'next-auth';
 import { redirect } from 'next/navigation';
 
 export async function signUpCredential(
@@ -47,4 +50,39 @@ export async function signUpCredential(
   }
 
   redirect('/login');
+}
+
+export async function loginCredential(_: unknown, formData: FormData): Promise<LoginFormState> {
+  const validateFields = loginCredentialSchema.safeParse(Object.fromEntries(formData));
+
+  if (!validateFields.success) {
+    return { error: 'Cek kembali penulisan email dan password.' };
+  }
+
+  const { email, password } = validateFields.data;
+
+  try {
+    await signIn('credentials', {
+      email,
+      password,
+      redirect: false,
+    });
+
+    redirect('/');
+  } catch (error) {
+    console.log('Login error: ', error);
+
+    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
+      throw error;
+    }
+
+    if (error instanceof CredentialsSignin) {
+      const errMessage = error.code;
+      if (errMessage) {
+        return { error: errMessage };
+      }
+    }
+
+    return { error: 'Terjadi kesalahan server' };
+  }
 }
