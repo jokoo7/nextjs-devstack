@@ -9,6 +9,7 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'John Doe',
     email: 'john@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
     posts: {
       create: [
@@ -29,6 +30,7 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'Jane Smith',
     email: 'jane@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
     posts: {
       create: [
@@ -54,6 +56,7 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'Michael Johnson',
     email: 'michael@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
     posts: {
       create: [
@@ -69,6 +72,7 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'Sarah Williams',
     email: 'sarah@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
     posts: {
       create: [
@@ -89,6 +93,7 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'David Brown',
     email: 'david@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
     posts: {
       create: [
@@ -114,30 +119,35 @@ const userData: Prisma.UserCreateInput[] = [
     name: 'Emily Davis',
     email: 'emily@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
   },
   {
     name: 'Robert Miller',
     email: 'robert@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
   },
   {
     name: 'Lisa Anderson',
     email: 'lisa@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
   },
   {
     name: 'James Wilson',
     email: 'james@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
   },
   {
     name: 'Maria Garcia',
     email: 'maria@example.com',
     password: hashPassword,
+    provider: 'credentials',
     role: 'USER',
   },
 ];

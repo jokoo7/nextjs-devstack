@@ -39,6 +39,7 @@ export async function signUpCredential(
       name,
       email,
       password: hashPassword,
+      provider: 'credentials',
     },
   });
 
@@ -67,14 +68,8 @@ export async function loginCredential(_: unknown, formData: FormData): Promise<L
       password,
       redirect: false,
     });
-
-    redirect('/');
   } catch (error) {
     console.log('Login error: ', error);
-
-    if (error instanceof Error && error.message === 'NEXT_REDIRECT') {
-      throw error;
-    }
 
     if (error instanceof CredentialsSignin) {
       const errMessage = error.code;
@@ -83,6 +78,9 @@ export async function loginCredential(_: unknown, formData: FormData): Promise<L
       }
     }
 
-    return { error: 'Terjadi kesalahan server' };
+    // Tangani error lain (server down, dsb.)
+    return { error: 'Terjadi kesalahan server. Coba lagi nanti.' };
   }
+
+  redirect('/');
 }
